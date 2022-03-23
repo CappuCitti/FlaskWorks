@@ -12,9 +12,11 @@ fontanelle = gpd.read_file("./static/files/Fontanelle.zip")
 def home():
   return render_template('index.html')
 
+
 @app.route('/map', methods=['GET'])
 def map():
   return render_template('map.html')
+
 
 @app.route('/visualizza', methods=['GET'])
 def view():
@@ -38,6 +40,7 @@ def search():
   my_map.save("templates/map.html")
 
   return render_template('getMap.html', navbar_content='search')
+
 
 @app.route('/ricerca', methods=['POST'])
 def add_component():
@@ -119,6 +122,7 @@ def choice_return_f():
   my_map.save("templates/map.html")
 
   return render_template('getMap.html', navbar_content='choice_f', shapes=quartieri["NIL"].sort_values(ascending=True).apply(lambda x: x.title()), selected=req, status=status)
+
 
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=5004)
