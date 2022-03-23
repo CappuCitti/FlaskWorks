@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  
+
+  <link rel="stylesheet" href="./static/css/style.css">
+  <link rel="stylesheet" href="./static/css/map.css">
+
+</head>
+
+<body>
+  <div class="navbar">
+    {% if navbar_content == 'get_all' %}
+    <p>Mappa di Milano suddivisa in quartieri</p>
+    {% elif navbar_content == 'search' %}
+    <form action="ricerca" class="serach" method="post">
+      <input type="text" name="nil" id="nil">
+      <input type="submit" value="CERCA" id="btnSubmit">
+    </form>
+    {% if not process %}
+    <p>{{status}}</p>
+    {% else %}
+    <p>{{status}}</p>
+    {% endif %}
+    {% elif navbar_content == 'choice' %}
+    <form action="scelta" class="scelta" method="post">
+      <select name="shapes" id="multiSelect">
+        {% for i in shapes %}
+        {% if selected.lower() == i.lower() %}
+        <option value="{{i}}" selected>{{i}}</option>
+        {% else %}
+        <option value="{{i}}">{{i}}</option>
+        {% endif %}
+        {%endfor%}
+      </select>
+      <input type="submit" value="CERCA" id="btnSubmit">
+    </form>
+    {% elif navbar_content == 'choice_f' %}
+    <form action="fontanelle" class="scelta" method="post">
+      <select name="shapes" id="multiSelect">
+        {% for i in shapes %}
+        {% if selected.lower() == i.lower() %}
+        <option value="{{i}}" selected>{{i}}</option>
+        {% else %}
+        <option value="{{i}}">{{i}}</option>
+        {% endif %}
+        {%endfor%}
+      </select>
+      <input type="submit" value="CERCA" id="btnSubmit">
+    </form>
+    {% if not process %}
+    <p>{{status}}</p>
+    {% else %}
+    {% for _ in status %}
+    <p>{{status}}</p>
+    {%endfor%}
+    {% endif %}
+    {% endif %}
+  </div>
+  <div class="mapContainer">
+    <iframe class="map" src="/map"></iframe>
+  </div>
+</body>
+
+</html>
